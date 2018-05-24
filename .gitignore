@@ -1,0 +1,5 @@
+*~
+*.so
+build/
+.ipynb_checkpoints
+algorithms.c
