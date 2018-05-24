@@ -57,7 +57,7 @@ cdef class pyfunc_nd(cyfunc_nd):
     def __init__(self, force):
         self.py_force = force
 
-def integrate(double[::1] x, double[::1] mu, double T, double dt, int npoints, int nsteps, f=None):
+def integrate_euler(double[::1] x, double[::1] mu, double T, double dt, int npoints, int nsteps, f=None):
     cdef cyfunc_nd py_f
     cdef int i
     cdef double time
@@ -80,6 +80,41 @@ def integrate(double[::1] x, double[::1] mu, double T, double dt, int npoints, i
             py_f.force(x, force)
             for k in range(x.shape[0]):
                 x[k] = x[k] + force[k]*mu[k]*dt + noise_factor[k]*rk_gauss(s)
+        x_out[i,:] = x
+
+    return np.asarray(x_out)
+
+def integrate_srk(double[::1] x, double[::1] mu, double T, double dt, int npoints, int nsteps, f=None):
+    cdef cyfunc_nd py_f
+    cdef int i
+    cdef double time
+
+    if f is None:
+        py_f = cyfunc_nd()
+    elif isinstance(f, cyfunc_nd):
+        py_f = f
+    elif callable(f):
+        py_f = pyfunc_nd(f)
+    else:
+        raise ValueError("f should be a callable or a cyfunc_d_d")
+
+    cdef double[:,::1] x_out = np.empty(shape=(npoints, x.shape[0]), dtype=float)
+    cdef double[::1] x_tmp = np.empty(x.shape[0], dtype=float)
+    cdef double[::1] force1 = np.empty(x.shape[0], dtype=float)
+    cdef double[::1] force2 = np.empty(x.shape[0], dtype=float)
+    cdef double[::1] noise_factor = np.sqrt(2*T*dt)*np.sqrt(mu)
+    cdef double[::1] noise = np.empty(x.shape[0], dtype=float)
+
+    for i in range(npoints):
+        for j in range(nsteps):
+            py_f.force(x, force1)
+            for k in range(x.shape[0]):
+                noise[k] = noise_factor[k]*rk_gauss(s)
+            for k in range(x.shape[0]):
+                x_tmp[k] = x[k] + force1[k]*mu[k]*dt + noise[k]
+            py_f.force(x_tmp, force2)
+            for k in range(x.shape[0]):
+                x[k] = x[k] + (force1[k]+force2[k])*mu[k]*dt + noise[k]
         x_out[i,:] = x
 
     return np.asarray(x_out)
