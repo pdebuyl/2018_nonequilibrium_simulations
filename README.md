@@ -11,11 +11,10 @@ https://arxiv.org/a/debuyl_p_1.html )
 
 ## Content
 
-- [01 - Introduction.ipynb](01 - Introduction.ipynb): a short introduction to
+- [01 - Introduction.ipynb](01%20-%20Introduction.ipynb): a short introduction to
   Python and NumPy.
-- [02 - Numerical simulation of the Langevin equation.ipynb](02 - Numerical
-  simulation of the Langevin equation.ipynb): presentation of the Euler and
-  Stochastic Runge-Kutta algorithms.
+- [02 - Numerical simulation of the Langevin equation.ipynb](02%20-%20Numerical%20simulation%20of%20the%20Langevin%20equation.ipynb):
+  presentation of the Euler and Stochastic Runge-Kutta algorithms.
 - [algorithms.pxd](algorithms.pxd) and [algorithms.pyx](algorithms.pyx): a
   Cython implementation of the algorithms. The algorithms accept Python
   functions or cythonized implementations for efficiency.
