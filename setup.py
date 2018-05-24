@@ -10,7 +10,7 @@ _, ran_module, _ = imp.find_module('mtrand', [ran_base])
 
 algorithms = cythonize(Extension("algorithms", sources=["algorithms.pyx"],
                        extra_objects=[ran_module],
-                       include_dirs=[ran_base]))
+                       include_dirs=[ran_base, np.get_include()]))
 
 setup(name='algorithms',
       description='Numerical simulation of the Langevin equation',
