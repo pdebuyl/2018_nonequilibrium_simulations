@@ -53,7 +53,7 @@ cdef class cyfunc_nd:
 
 cdef class pyfunc_nd(cyfunc_nd):
     cpdef void force(self, double[::1] x, double[::1] f):
-        self.py_force(x, f)
+        f[:] = self.py_force(x)
     def __init__(self, force):
         self.py_force = force
 
