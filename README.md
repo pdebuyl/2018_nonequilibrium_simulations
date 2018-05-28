@@ -15,6 +15,9 @@ https://arxiv.org/a/debuyl_p_1.html )
   Python and NumPy.
 - [02 - Numerical simulation of the Langevin equation.ipynb](02%20-%20Numerical%20simulation%20of%20the%20Langevin%20equation.ipynb):
   presentation of the Euler and Stochastic Runge-Kutta algorithms.
+- [03 - Forced particle on a circle.ipynb](03%20-%20Forced%20particle%20on%20a%20circle.ipynb)
+- [04 - Active Brownian Particles.ipynb](04%20-%20Active%20Brownian%20Particles.ipynb)
+- [05 - Master equation.ipynb](05%20-%20Master%20equation.ipynb)
 - [algorithms.pxd](algorithms.pxd) and [algorithms.pyx](algorithms.pyx): a
   Cython implementation of the algorithms. The algorithms accept Python
   functions or cythonized implementations for efficiency.
