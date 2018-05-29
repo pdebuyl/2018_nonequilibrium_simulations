@@ -114,7 +114,7 @@ def integrate_srk(double[::1] x, double[::1] mu, double T, double dt, int npoint
                 x_tmp[k] = x[k] + force1[k]*mu[k]*dt + noise[k]
             py_f.force(x_tmp, force2)
             for k in range(x.shape[0]):
-                x[k] = x[k] + (force1[k]+force2[k])*mu[k]*dt + noise[k]
+                x[k] = x[k] + (force1[k]+force2[k])*mu[k]*dt/2 + noise[k]
         x_out[i,:] = x
 
     return np.asarray(x_out)
