@@ -45,6 +45,9 @@ python3 -m pip install --user -U pip
 python3 -m pip install --user -r requirements.txt
 ```
 
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/pdebuyl/2018_nonequilibrium_simulations/master)
+
+
 ## Citation
 
 If you make use of this material in published work (whether the code or the
